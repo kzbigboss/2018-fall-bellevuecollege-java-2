@@ -103,12 +103,15 @@ cartofgoodies.setDiscount(false)
 System.out.println(cartofgoodies.getDiscount())
 
 // adding items + getting totals
+// TODO THIS TEST NO LONGER IS VALID AFTER WRITING ADD/DROP LOGIC
 ShoppingCart cartofgoodies = new ShoppingCart()
 Item item3 = new Item("'Java Rules!' bumper sticker", 0.99, 20, 8.95)
 ItemOrder iwantthis = new ItemOrder(item3, 30)
+ItemOrder iwantthat = new ItemOrder(item3, 30)
+ItemOrder iwantthose = new ItemOrder(item3, 30)
 cartofgoodies.add(iwantthis)
-cartofgoodies.add(iwantthis)
-cartofgoodies.add(iwantthis)
+cartofgoodies.add(iwantthat)
+cartofgoodies.add(iwantthose)
 // expecting ( (1 * 8.95) + (10 * 0.99) ) * 3 = 56.55
 System.out.println(cartofgoodies.getTotal())
 // now set the discount and see the price change
@@ -118,4 +121,20 @@ System.out.println(cartofgoodies.getTotal())
 // set the discount back to off and validate the total
 // comes back to 56.55
 cartofgoodies.setDiscount(false)
+System.out.println(cartofgoodies.getTotal())
+
+
+// replacing items that already exist in the shopping cart
+// requirement is not to the same item over and over.
+// instead, if an item is already added, remove it and keep
+// the latest entry
+ShoppingCart cartofgoodies = new ShoppingCart()
+Item item3 = new Item("'Java Rules!' bumper sticker", 0.99, 20, 8.95)
+Item item4 = new Item("Something else", 0.89, 10, 7.00)
+ItemOrder iwantthis = new ItemOrder(item3, 3)
+ItemOrder iwantthat = new ItemOrder(item3, 3)
+ItemOrder iwantthose = new ItemOrder(item4, 12)
+cartofgoodies.add(iwantthis)
+System.out.println(cartofgoodies.getTotal())
+cartofgoodies.add((iwantthat))
 System.out.println(cartofgoodies.getTotal())
