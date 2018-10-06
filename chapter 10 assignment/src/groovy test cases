@@ -1,0 +1,84 @@
+//////////////// ITEM
+// test constructors
+Item itemNonBulk = new Item("'Java Rules!' button", 0.99) // non-bulk item
+Item itemBulk = new Item("'Java Rules!' button", 0.99, 10, 5.0) // bulk-item
+
+// constructors error with negative numbers
+Item bad0 = new Item("blahrah", -5);
+Item bad1 = new Item("blahrah", -5, 10, 3);
+Item bad2 = new Item("blahrah", 5, -10, 3);
+Item bad3 = new Item("blahrah", 5, 10, -3);
+
+// get prices for non-bulk item
+Item itemNonBulk = new Item("'Java Rules!' button", 0.99)
+if (itemNonBulk.priceFor(5) == 4.95) { true } else { false }
+itemNonBulk.priceFor(6)
+
+// get price while negative should error for non-bulk items
+Item itemNonBulk = new Item("'Java Rules!' button", 0.99)
+/// should error
+itemNonBulk.priceFor(-10)
+
+// get prices for bulk item
+// logic should always apply bulk pricing first the
+// calculate non-bulk items last
+
+Item itemBulk = new Item("'Java Rules!' button", 0.99, 10, 5.0)
+//// non bulk price of 0.99 * quantity 5 = 4.95
+System.out.println(itemBulk.priceFor(5) == 4.95)
+
+//// now qty 10 sb 5
+System.out.println(itemBulk.priceFor(10) == 5)
+
+//// qty 22 sb (5 * 2) + (.99 * 2) = 11.98
+itemBulk.priceFor(22)
+
+//// qty 39 sb (5 * 3) + (.99 * 9) = 23.91
+itemBulk.priceFor(39)
+
+// test toString result for both nonBulk and bulk items
+// also leveraging NumberFormat to state (double) price into (string) currency
+Item itemNonBulk = new Item("'Java Rules!' button", 0.99)
+System.out.println(itemNonBulk.toString())
+
+Item itemBulk = new Item("'Java Rules!' button", 0.99, 10, 5.0)
+System.out.println(itemBulk.toString())
+
+//////////////// CATALOG
+// create new catalog and try calling it's name
+Catalog thingoling = new Catalog("stufftosell");
+System.out.println(thingoling.getName())
+
+// random items
+
+Item item1 = new Item("Computer Science Barbie", 19.99)
+Item item2 = new Item("'Java Rules!' button", 0.99, 10, 5.0)
+Item item3 = new Item("'Java Rules!' bumper sticker", 0.99, 20, 8.95)
+
+// try adding random items to thingoling catalog
+thingoling.add(item1)
+thingoling.add(item2)
+thingoling.add(item3)
+
+// validate that thingoling new contains 3 items
+System.out.println(thingoling.size())
+
+// try getting an item out of the catalog
+// should print 'Java Rules' toString result
+System.out.println(thingoling.get(1))
+
+
+
+
+
+
+//////////// ITEMORDER
+Item item3 = new Item("'Java Rules!' bumper sticker", 0.99, 20, 8.95)
+ItemOrder iwantthis = new ItemOrder(item3, 30)
+
+// check how much this ItemOrder costs
+// sb (1 * 8.95) + (10 * 0.99) = 18.85
+iwantthis.getPrice()
+
+// validate that an item is returned when getItem() is called
+iwantthis.getItem()

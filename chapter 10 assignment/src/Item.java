@@ -1,3 +1,5 @@
+import java.text.*;
+
 public class Item {
 
     // fields
@@ -5,6 +7,7 @@ public class Item {
     double price;
     int bulkQuantity;
     double bulkPrice;
+    NumberFormat nf = NumberFormat.getCurrencyInstance();
 
     // constructors
     public Item (String name, double price){
@@ -29,26 +32,40 @@ public class Item {
     public double priceFor(int quantity){
 
         // throw error if value is less than zero
-        if (quantity < 0){
+        if (quantity < 0) {
             throw new IllegalArgumentException("Quantity cannot be less than zero.");
         }
 
-        // TODO solve when bulk quantity is zero; currently throwing an error when div0
+        // if bulkQuantity isn't set, return qty * price
+        // else run through logic to determine price by maximizing
+        // bulk cost before individual cost
 
-        // If no bulk quantity set, simply return quantity * price
-        if (bulkQuantity == 0) return quantity * price;
+        if (bulkQuantity == 0){
+            return quantity * price;
+        } else {
+            // Remove quantities covered by bulk prices
+            int bulkInstance = quantity / bulkQuantity;
+            quantity -= bulkInstance * bulkQuantity;
 
-        // determine how many bulk quantities are being purchased
-        // then reduce quantity amount being fulfill via bulk quantities
-        int bulkInstance = quantity / bulkQuantity;
-        quantity -= bulkInstance * bulkQuantity;
+            // add together resulting bulk and individual costs
+            return (bulkInstance * bulkPrice) + (quantity * price);
 
-        // return the price
-        return  (quantity * price)              // individual quantities price
-                    +
-                (bulkInstance * bulkPrice);     // bulk quantities price
+        }
 
     }
 
+    public String toString(){
+
+        // record start of string regardless of nonBulk v bulk
+        //String result = name +", " + price;
+        String result = name +", " + nf.format(price);
+
+        // if bulk, append bulk pricing details
+        if (bulkQuantity != 0){
+            result += " (" + bulkQuantity + " for " + nf.format(bulkPrice) + ")";
+        }
+
+        return result;
+    }
 
 }
