@@ -1,13 +1,17 @@
+// overall strategy: make an object to hold all the fields/methods
+// necessary to meet Item requirements.  Leverage NumberFormat
+// object to help with translating (double) price into (String) currency.
+
 import java.text.*;
 
 public class Item {
 
     // fields
-    String name;
-    double price;
-    int bulkQuantity;
-    double bulkPrice;
-    NumberFormat nf = NumberFormat.getCurrencyInstance();
+    private String name;
+    private double price;
+    private int bulkQuantity;
+    private double bulkPrice;
+    private NumberFormat nf = NumberFormat.getCurrencyInstance();
 
     // constructors
     public Item (String name, double price){

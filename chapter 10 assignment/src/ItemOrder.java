@@ -4,8 +4,8 @@
 public class ItemOrder {
 
     // fields
-    Item itemOrdered;
-    int quantityOrdered;
+    private Item itemOrdered;
+    private int quantityOrdered;
 
     public ItemOrder(Item itemInput, int quantityInput) {
         itemOrdered = itemInput;

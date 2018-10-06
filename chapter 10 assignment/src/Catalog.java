@@ -5,8 +5,8 @@ import java.util.*;
 
 public class Catalog {
     // fields
-    String name;
-    ArrayList<Item> itemList = new ArrayList<Item>();
+    private String name;
+    private ArrayList<Item> itemList = new ArrayList<Item>();
 
     // constructors
     public Catalog(String name){

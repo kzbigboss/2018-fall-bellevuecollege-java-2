@@ -65,7 +65,7 @@ System.out.println(thingoling.size())
 
 // try getting an item out of the catalog
 // should print 'Java Rules' toString result
-System.out.println(thingoling.get(1))
+System.out.println(thingoling.get(10))
 
 
 
@@ -82,3 +82,40 @@ iwantthis.getPrice()
 
 // validate that an item is returned when getItem() is called
 iwantthis.getItem()
+
+
+
+
+
+
+
+
+//////////// SHOPPING CART
+// testing discount boolean
+ShoppingCart cartofgoodies = new ShoppingCart()
+System.out.println("default boolean")
+System.out.println(cartofgoodies.getDiscount())
+System.out.println("set true")
+cartofgoodies.setDiscount(true)
+System.out.println(cartofgoodies.getDiscount())
+System.out.println("set false")
+cartofgoodies.setDiscount(false)
+System.out.println(cartofgoodies.getDiscount())
+
+// adding items + getting totals
+ShoppingCart cartofgoodies = new ShoppingCart()
+Item item3 = new Item("'Java Rules!' bumper sticker", 0.99, 20, 8.95)
+ItemOrder iwantthis = new ItemOrder(item3, 30)
+cartofgoodies.add(iwantthis)
+cartofgoodies.add(iwantthis)
+cartofgoodies.add(iwantthis)
+// expecting ( (1 * 8.95) + (10 * 0.99) ) * 3 = 56.55
+System.out.println(cartofgoodies.getTotal())
+// now set the discount and see the price change
+// expecting 56.55 * .9 = 50.90
+cartofgoodies.setDiscount(true)
+System.out.println(cartofgoodies.getTotal())
+// set the discount back to off and validate the total
+// comes back to 56.55
+cartofgoodies.setDiscount(false)
+System.out.println(cartofgoodies.getTotal())
