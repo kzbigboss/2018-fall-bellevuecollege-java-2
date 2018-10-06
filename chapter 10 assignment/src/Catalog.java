@@ -1,21 +1,34 @@
-// overall strategy is to extend ArrayList<Item>
-// and give the catalog an accessor to get its name.
+// overall strategy: create an object that 'has a' ArrayList<Item>
+// per instructions.
 
 import java.util.*;
 
-public class Catalog extends ArrayList<Item> {
+public class Catalog {
     // fields
     String name;
+    ArrayList<Item> itemList = new ArrayList<Item>();
 
     // constructors
     public Catalog(String name){
-        super();            // instantiate ArrayList<Item> object
         this.name = name;   // set the catalog's name
     }
 
     // accessors
     public String getName(){
         return name;
+    }
+
+    public int size(){
+        return itemList.size();
+    }
+
+    public Item get(int index){
+        return itemList.get(index);
+    }
+
+    // mutators
+    public void add(Item inputItem){
+        itemList.add(inputItem);
     }
 
 }
