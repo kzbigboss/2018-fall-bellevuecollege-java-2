@@ -33,6 +33,11 @@ public class Item {
             throw new IllegalArgumentException("Quantity cannot be less than zero.");
         }
 
+        // TODO solve when bulk quantity is zero; currently throwing an error when div0
+
+        // If no bulk quantity set, simply return quantity * price
+        if (bulkQuantity == 0) return quantity * price;
+
         // determine how many bulk quantities are being purchased
         // then reduce quantity amount being fulfill via bulk quantities
         int bulkInstance = quantity / bulkQuantity;
