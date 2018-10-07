@@ -1,3 +1,10 @@
+/*
+ * Mark Kazzaz, 2018-10-07
+ * Bellevue College Fall 2018
+ * Chapter 10 Assignment
+ *
+ */
+
 // overall strategy: create an object that 'has a' ArrayList<Item>
 // per instructions.
 

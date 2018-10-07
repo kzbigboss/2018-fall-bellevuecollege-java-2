@@ -1,3 +1,10 @@
+/*
+ * Mark Kazzaz, 2018-10-07
+ * Bellevue College Fall 2018
+ * Chapter 10 Assignment
+ *
+ */
+
 // overall strategy: leverage a 'has a' ArrayList<E> (per requirements)
 // to satisfy Shopping Cart requirements.  Use methods to traverse the
 // shopping cart to calculate totals.  Remove items if they're already

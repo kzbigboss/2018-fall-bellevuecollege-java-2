@@ -1,3 +1,10 @@
+/*
+ * Mark Kazzaz, 2018-10-07
+ * Bellevue College Fall 2018
+ * Chapter 10 Assignment
+ *
+ */
+
 // overall strategy: make an object to hold all the fields/methods
 // necessary to meet Item requirements.  Leverage NumberFormat
 // object to help with translating (double) price into (String) currency.
