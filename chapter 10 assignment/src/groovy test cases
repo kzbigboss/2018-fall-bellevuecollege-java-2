@@ -11,12 +11,10 @@ Item bad3 = new Item("blahrah", 5, 10, -3);
 
 // get prices for non-bulk item
 Item itemNonBulk = new Item("'Java Rules!' button", 0.99)
-if (itemNonBulk.priceFor(5) == 4.95) { true } else { false }
-itemNonBulk.priceFor(6)
+itemNonBulk.priceFor(6) //sb 6 * 0.99 = 5.94
 
 // get price while negative should error for non-bulk items
 Item itemNonBulk = new Item("'Java Rules!' button", 0.99)
-/// should error
 itemNonBulk.priceFor(-10)
 
 // get prices for bulk item
@@ -45,12 +43,10 @@ Item itemBulk = new Item("'Java Rules!' button", 0.99, 10, 5.0)
 System.out.println(itemBulk.toString())
 
 //////////////// CATALOG
-// create new catalog and try calling it's name
+// create new catalog
 Catalog thingoling = new Catalog("stufftosell");
-System.out.println(thingoling.getName())
 
 // random items
-
 Item item1 = new Item("Computer Science Barbie", 19.99)
 Item item2 = new Item("'Java Rules!' button", 0.99, 10, 5.0)
 Item item3 = new Item("'Java Rules!' bumper sticker", 0.99, 20, 8.95)
@@ -64,8 +60,11 @@ thingoling.add(item3)
 System.out.println(thingoling.size())
 
 // try getting an item out of the catalog
-// should print 'Java Rules' toString result
-System.out.println(thingoling.get(10))
+// should print 'Java Rules' button toString result
+System.out.println(thingoling.get(1))
+
+// get the catalog's name
+System.out.println(thingoling.getName())
 
 
 
@@ -78,10 +77,10 @@ ItemOrder iwantthis = new ItemOrder(item3, 30)
 
 // check how much this ItemOrder costs
 // sb (1 * 8.95) + (10 * 0.99) = 18.85
-iwantthis.getPrice()
+System.out.println("Price: " + iwantthis.getPrice())
 
 // validate that an item is returned when getItem() is called
-iwantthis.getItem()
+System.out.println("Item: " + iwantthis.getItem())
 
 
 
@@ -107,11 +106,7 @@ System.out.println(cartofgoodies.getDiscount())
 ShoppingCart cartofgoodies = new ShoppingCart()
 Item item3 = new Item("'Java Rules!' bumper sticker", 0.99, 20, 8.95)
 ItemOrder iwantthis = new ItemOrder(item3, 30)
-ItemOrder iwantthat = new ItemOrder(item3, 30)
-ItemOrder iwantthose = new ItemOrder(item3, 30)
 cartofgoodies.add(iwantthis)
-cartofgoodies.add(iwantthat)
-cartofgoodies.add(iwantthose)
 // expecting ( (1 * 8.95) + (10 * 0.99) ) * 3 = 56.55
 System.out.println(cartofgoodies.getTotal())
 // now set the discount and see the price change
@@ -138,3 +133,53 @@ cartofgoodies.add(iwantthis)
 System.out.println(cartofgoodies.getTotal())
 cartofgoodies.add((iwantthat))
 System.out.println(cartofgoodies.getTotal())
+
+// shopping cart testing
+// adding items + getting totals + setting discount
+ShoppingCart cartofgoodies = new ShoppingCart()
+Item item1 = new Item("Computer Science Barbie", 19.99)
+Item item2 = new Item("'Java Rules!' button", 0.99, 10, 5.0)
+Item item3 = new Item("'Java Rules!' bumper sticker", 0.99, 20, 8.95)
+ItemOrder iwantthis = new ItemOrder(item1, 3)
+ItemOrder iwantthat = new ItemOrder(item2, 15)
+ItemOrder iwantthose = new ItemOrder(item3, 15)
+cartofgoodies.add(iwantthis)
+cartofgoodies.add(iwantthat)
+cartofgoodies.add(iwantthose)
+// expecting    (19.99 * 3) = 59.97             // barbies
+//              (5 * 1) + (5 * .99) = 9.95      // buttons
+//              (15 * .99) = 14.85              // stickers
+//              59.97 + 9.95 + 14.85 = 84.77    // cart total
+System.out.println("Cart total wo discount: " + cartofgoodies.getTotal())
+// now set the discount and see the price change
+// expecting 84.77 * .9 = 76.29
+cartofgoodies.setDiscount(true)
+System.out.println("Cart total with discount: " + cartofgoodies.getTotal())
+
+// shopping cart add already existing item walkthrough
+// shopping cart should REPLACE an ItemOrder if
+// the item is already present in the shopping cart.
+
+ShoppingCart cartofgoodies = new ShoppingCart() // create cart
+Item item1 = new Item("'Java Rules!' button", 0.99, 10, 5.0) // create item
+
+// three different ItemOrder of the same item with different quantities
+ItemOrder itemorder1 = new ItemOrder(item1, 3)
+ItemOrder itemorder2 = new ItemOrder(item1, 5)
+ItemOrder itemorder3 = new ItemOrder(item1, 0)
+
+// adding first ItemOrder, expecting cart total (0.99 * 3) = 2.97
+cartofgoodies.add(itemorder1)
+System.out.println("Cart total after 1st ItemOrder: " + cartofgoodies.getTotal())
+
+// replace with next ItemOrder of new quantity 5
+// cart will remove previous ItemOrder since it's the same item
+// expecting (.99 * 5) = 4.95
+cartofgoodies.add(itemorder2)
+System.out.println("Cart total after 2st ItemOrder: " + cartofgoodies.getTotal())
+
+// replace with next ItemOrder of new quantity 0
+// cart will remove previous ItemOrder since it's the same item
+// expecting (.99 * 0) = 0.00
+cartofgoodies.add(itemorder3)
+System.out.println("Cart total after 3rd ItemOrder: " + cartofgoodies.getTotal())
