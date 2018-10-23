@@ -1,3 +1,8 @@
+// Mark Kazzaz
+// Bellevue College CS211 Fall Quarter
+// Assignment 4 - Chapter 11
+// 2018-10-23
+
 // This program reads an input file of preferences and find a stable marriage
 // scenario.  The algorithm gives preference to either men or women depending
 // upon whether this call is made from main:
