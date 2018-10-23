@@ -1,8 +1,3 @@
-// Mark Kazzaz
-// Bellvue College CS211 Fall Quarter
-// Assignment 4 - Chapter 11
-// 2018-10-19
-
 // This program reads an input file of preferences and find a stable marriage
 // scenario.  The algorithm gives preference to either men or women depending
 // upon whether this call is made from main:
@@ -10,7 +5,8 @@
 // or whether this call is made:
 //      makeMatches(women, men);
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class StableMarriage {
@@ -54,92 +50,72 @@ public class StableMarriage {
     public static void makeMatches(List<Person> list1, List<Person> list2) {
         // when starting to make matches, first make sure everyone
         // is listed as free.
+
+        //setAllNotFree(list1); // for testing only
+
         setAllFree(list1);
         setAllFree(list2);
 
-        // create two sets of people and preferences, make it generic
-        // enough to enable the client to switch men/women groups
-        HashMap<Person, List<Integer>> marriageLeftSide = new HashMap<>();
-        HashMap<Person, List<Integer>> marriageRightSide = new HashMap<>();
-        addToSide(list1, marriageLeftSide);
-        addToSide(list2, marriageRightSide);
+        while (stillOpen(list1)) {
+            // create a list of people who need to assignments passed through
+            List<Person> needToAssign = new ArrayList<>();
+            for (Person subject : list1) {
+                if (subject.hasChoices() && !subject.hasPartner()) {
+                    needToAssign.add(subject);
+                }
+            }
 
-        // create a list of leftside of the marriage to cycle through
-        List<Person> needToAssign = new ArrayList<Person>();
-        needToAssign.addAll(list1);
-        ListIterator<Person> it = needToAssign.listIterator();
-
-        // Begin loop to assign couples
-        //
-        // while needToAssign still contains people to process
-
-
-        while (it.hasNext()) {
-            // cycle through people currently on the need to assign list
-            Person leftSide = it.next();
-
-            // record what number the leftSide person is from
-            // the list of people
+            // grab the first person as the left side of the marriage
+            Person leftSide = needToAssign.get(0);
             Integer leftSideNumber = list1.indexOf(leftSide);
 
-            // record who is the most preferred match and record their number
-            Person rightSide = list2.get(marriageLeftSide.get(leftSide).get(0));
+            // figure out who the right side of the marriage is
+            Person rightSide = list2.get(leftSide.getChoices().get(0));
             Integer rightSideNumber = list2.indexOf(rightSide);
 
-            // if rightside has partner, set the partner free
+            // if rightSide currently has a spouse, unassign them
             if (rightSide.hasPartner()) {
-                Person p = list1.get(rightSide.getPartner());
-                p.erasePartner();
+                list1.get(rightSide.getPartner()).erasePartner();
             }
 
-            // set left and right to be each other's partners
-            leftSide.setPartner(rightSideNumber);
-            rightSide.setPartner(leftSideNumber);
+            // set the engagement between left and right side
+            leftSide.setPartner(list2.indexOf(rightSide));
+            rightSide.setPartner(list1.indexOf(leftSide));
 
-            // remove rightSide's availability from other leftSide's lists
-            for (Person otherLeftSide : marriageLeftSide.keySet()) {
-                if (!otherLeftSide.equals(leftSide)) {
-                    List<Integer> updateList = marriageLeftSide.get(otherLeftSide);
-                    updateList.remove(marriageLeftSide.get(leftSide).get(0));
-                }
+            // step through rightSide's preference list and remove
+            // less preferred matches from both rightSide and otherLeftSide
+            int leftSideRank = rightSide.getChoices().indexOf(leftSideNumber);
+            ArrayList<Integer> otherLeftSide = new ArrayList<Integer>();
+
+            for (int i = leftSideRank + 1; i < rightSide.getChoices().size(); i++){
+                otherLeftSide.add(rightSide.getChoices().get(i));
             }
 
-            // update rightSide's preferences leaving only more preferred matches in the list
-            List<Integer> updateList = marriageRightSide.get(rightSide);
-            int leftRankInRight = updateList.indexOf(leftSideNumber);
+            // drop choices from rightSide
+            rightSide.getChoices().removeAll(otherLeftSide);
 
-            // for (start to end in rightSide preferences : remove i);
-            for (int i = leftRankInRight + 1; i < updateList.size(); i++) {
-                updateList.remove(i);
-            }
-
-            // Update the mapping for the right side after removing
-            // for less preferable matches
-            marriageRightSide.put(rightSide, updateList);
-
-            // make lists updates
-            it.remove(); //remove current person from list
-            for (Person subject : list1){
-                if (subject.hasChoices() && !subject.hasPartner()){
-                    it.add(subject);
-                }
+            // drop rightSide availability from otherLeftSides
+            for (int subject : otherLeftSide){
+                list1.get(subject).getChoices().remove(rightSideNumber);
             }
 
         }
 
 
-    }
-
-    public static void addToSide(List<Person> list, HashMap<Person, List<Integer>> map) {
-        for (Person subject : list) {
-            map.put(subject, subject.getChoices());
-        }
     }
 
     public static void setAllFree(List<Person> list) {
         // cycle through a list of people and set them all free
         for (Person subject : list) {
             subject.erasePartner();
+        }
+    }
+
+    public static void setAllNotFree(List<Person> list) {
+        // for testing purposes only
+        // setting all people to be assigned to person 0
+        for (Person subject : list) {
+            subject.setPartner(0);
         }
     }
 
@@ -164,6 +140,16 @@ public class StableMarriage {
         }
         System.out.println("Mean choice = " + (double) sum / count);
         System.out.println();
+    }
+
+    public static boolean stillOpen(List<Person> list) {
+        for (Person subject : list) {
+            if (!subject.hasPartner() && subject.hasChoices()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
