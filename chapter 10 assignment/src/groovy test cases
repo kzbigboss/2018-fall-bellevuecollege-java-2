@@ -102,7 +102,7 @@ cartofgoodies.setDiscount(false)
 System.out.println(cartofgoodies.getDiscount())
 
 // adding items + getting totals
-// TODO THIS TEST NO LONGER IS VALID AFTER WRITING ADD/DROP LOGIC
+//  THIS TEST NO LONGER IS VALID AFTER WRITING ADD/DROP LOGIC
 ShoppingCart cartofgoodies = new ShoppingCart()
 Item item3 = new Item("'Java Rules!' bumper sticker", 0.99, 20, 8.95)
 ItemOrder iwantthis = new ItemOrder(item3, 30)
