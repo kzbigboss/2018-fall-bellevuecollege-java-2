@@ -133,7 +133,6 @@ public class Assignment6 {
 
         }
 
-
         System.out.println();
 
         System.out.println(isMirrored(myQueueP) + " isMirrored");
@@ -173,7 +172,6 @@ public class Assignment6 {
 
         }
 
-
         System.out.println();
         print(myStack);
 
@@ -193,4 +191,4 @@ public class Assignment6 {
 
     }
 
-} //end of Assignment6 
+} //end of Assignment6
