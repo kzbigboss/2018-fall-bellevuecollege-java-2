@@ -13,9 +13,9 @@ public class Assignment6 {
 
 
     public static void main(String[] args) {
-//        testSeeingThreeMethod();
+        testSeeingThreeMethod();
         testTwoStacksAreEqualMethod();
-//        testIsMirrored();
+        testIsMirrored();
 
     }
 
