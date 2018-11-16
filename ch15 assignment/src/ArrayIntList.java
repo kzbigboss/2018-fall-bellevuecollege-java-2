@@ -281,43 +281,67 @@ public class ArrayIntList implements Iterable<Integer> {
 
     // start of code written by Mark Kazzaz
 
-    // requirement 1: method called uptoNowTotal() that returns a
+    // requirement 1: instance method called uptoNowTotal() that returns a
     // new ArrayIntList containing a running total of the input list
 
     // post:    returns a newly constructed ArrayIntList reflecting a
-    //          running total of the input list.
+    //          running total of the list this method is called on.
     //          &&
-    //          newly created ArrayIntList has the same capacity value.
+    //          newly created ArrayIntList has the same capacity of source list.
 
-    public static ArrayIntList upToNowTotal(ArrayIntList input) {
-        // TODO do not make these static
+//    public static ArrayIntList upToNowTotal11(ArrayIntList input) {
+//
+//        // create new ArrayIntList with same capacity as input list
+//        ArrayIntList result = new ArrayIntList(input.getCapacity());
+//
+//        // evaluate if size is < 0
+//        if (input.size() < 0) {
+//            // if true, return empty list
+//            return result;
+//        } else {
+//            // if false, proceed with method
+//
+//            // fencepost loop through the input list while
+//            // adding the previous result list and the current input
+//            // list element values together
+//
+//            /// fencepost
+//            result.add(input.get(0));
+//
+//            /// current input element + prior result element
+//            for (int i = 1; i < input.size(); i++) { // loop 1 thru N
+//                result.add(input.get(i) + result.get(i - 1));
+//            }
+//
+//            return result;
+//        }
+//
+//    }
 
-        // create new ArrayIntList with same capacity as input list
-        ArrayIntList result = new ArrayIntList(input.getCapacity());
+    public ArrayIntList upToNowTotal() {
+        // create new ArrayIntList with same capacity as source list
+        ArrayIntList result = new ArrayIntList(this.getCapacity());
 
-        // evaluate if size is < 0
-        if (input.size() < 0) {
+        // evaluate if size is <= 0
+        if (this.size <= 0) {
             // if true, return empty list
             return result;
         } else {
-            // if false, proceed with method
+            // if false, proceed with create new running total list
 
-            // fencepost loop through the input list while
-            // adding the previous result list and the current input
-            // list element values together
+            // fencepost (get initial value) then loop to add current value
+            // to preceeding value
 
-            /// fencepost
-            result.add(input.get(0));
+            result.add(elementData[0]);
 
-            /// current input element + prior result element
-            for (int i = 1; i < input.size(); i++) { // loop 1 thru N
-                result.add(input.get(i) + result.get(i - 1));
+            for (int i = 1; i < size; i++) {
+                result.add(elementData[i] + result.get(i - 1));
             }
 
             return result;
         }
-
     }
+
 
     // requirement 2: method called isPairSorted() that returns a boolean
     // indicating if the pairs in a ArrayIntList are in sorted order. if a
@@ -327,25 +351,41 @@ public class ArrayIntList implements Iterable<Integer> {
     // post:    function steps through the pairs of elements in the input list
     //          and reports true/false based on whether the pairs are sorted.
 
-    public static boolean isPairSorted(ArrayIntList input) {
+//    public static boolean isPairSorted(ArrayIntList input) {
+//
+//        // we can use a for loop based on half the size of the list size.  This
+//        // will help us compare pairs as well as ignore the final element in
+//        // odd sized lists.
+//
+//        for (int i = 0; i < input.size() / 2; i++) {
+//            // leverage multiplication and figure out if all pairs are ordered.
+//            // if not, return false
+//            int firstHalf = input.get(i * 2);
+//            int secondHalf = input.get(i * 2 + 1);
+//            if (firstHalf > secondHalf) {
+//                return false;
+//            }
+//
+//        }
+//
+//        // if we traverse the list without setting off the if statement above,
+//        // then return true
+//        return true;
+//    }
 
-        // we can use a for loop based on half the size of the list size.  This
-        // will help us compare pairs as well as ignore the final element in
-        // odd sized lists.
 
-        for (int i = 0; i < input.size() / 2; i++) {
-            // leverage multiplication and figure out if all pairs are ordered.
-            // if not, return false
-            int firstHalf = input.get(i * 2);
-            int secondHalf = input.get(i * 2 + 1);
-            if (firstHalf > secondHalf) {
+    //post: return true/false after evaluating if list's ordered pairs are sorted
+    public boolean isPairSorted(){
+        for (int i = 0; i < size / 2; i++){
+            //TODO COMMMENTS
+            int firstHalf = elementData[i * 2];
+            int secondHalf = elementData[i * 2 + 1];
+            if (firstHalf > secondHalf){
                 return false;
             }
-
         }
 
-        // if we traverse the list without setting off the if statement above,
-        // then return true
+        //TODO COMMENTS
         return true;
     }
 
@@ -354,11 +394,7 @@ public class ArrayIntList implements Iterable<Integer> {
 
 
     public void removeLast(int n){
-        int start = size - n;
-
-        for (int i = start; i < size; i++){
-
-        }
+        size = size - n;
     }
 
 }
