@@ -295,35 +295,6 @@ public class ArrayIntList implements Iterable<Integer> {
     //          &&
     //          newly created ArrayIntList has the same capacity of source list.
 
-//    public static ArrayIntList upToNowTotal11(ArrayIntList input) {
-//
-//        // create new ArrayIntList with same capacity as input list
-//        ArrayIntList result = new ArrayIntList(input.getCapacity());
-//
-//        // evaluate if size is < 0
-//        if (input.size() < 0) {
-//            // if true, return empty list
-//            return result;
-//        } else {
-//            // if false, proceed with method
-//
-//            // fencepost loop through the input list while
-//            // adding the previous result list and the current input
-//            // list element values together
-//
-//            /// fencepost
-//            result.add(input.get(0));
-//
-//            /// current input element + prior result element
-//            for (int i = 1; i < input.size(); i++) { // loop 1 thru N
-//                result.add(input.get(i) + result.get(i - 1));
-//            }
-//
-//            return result;
-//        }
-//
-//    }
-
     public ArrayIntList upToNowTotal() {
         // create new ArrayIntList with same capacity as source list
         ArrayIntList result = new ArrayIntList(this.getCapacity());
@@ -349,57 +320,42 @@ public class ArrayIntList implements Iterable<Integer> {
     }
 
 
-    // requirement 2: method called isPairSorted() that returns a boolean
-    // indicating if the pairs in a ArrayIntList are in sorted order. if a
-    // list contains an odd number of elements, ignore the final element. if a
-    // list contains zero elements, report true.
-
-    // post:    function steps through the pairs of elements in the input list
-    //          and reports true/false based on whether the pairs are sorted.
-
-//    public static boolean isPairSorted(ArrayIntList input) {
-//
-//        // we can use a for loop based on half the size of the list size.  This
-//        // will help us compare pairs as well as ignore the final element in
-//        // odd sized lists.
-//
-//        for (int i = 0; i < input.size() / 2; i++) {
-//            // leverage multiplication and figure out if all pairs are ordered.
-//            // if not, return false
-//            int firstHalf = input.get(i * 2);
-//            int secondHalf = input.get(i * 2 + 1);
-//            if (firstHalf > secondHalf) {
-//                return false;
-//            }
-//
-//        }
-//
-//        // if we traverse the list without setting off the if statement above,
-//        // then return true
-//        return true;
-//    }
+//     requirement 2: method called isPairSorted() that returns a boolean
+//     indicating if the pairs in a ArrayIntList are in sorted order. if a
+//     list contains an odd number of elements, ignore the final element. if a
+//     list contains zero elements, report true.
 
 
-    //post: return true/false after evaluating if list's ordered pairs are sorted
-    public boolean isPairSorted(){
-        for (int i = 0; i < size / 2; i++){
-            //TODO COMMMENTS
+    //    post: return true/false after evaluating if list's ordered pairs are sorted
+    public boolean isPairSorted() {
+        for (int i = 0; i < size / 2; i++) {
+            // leverage multiplication, step through each pair, consider if
+            // the first half of the pair is greater than the second half of
+            // the pair.
             int firstHalf = elementData[i * 2];
             int secondHalf = elementData[i * 2 + 1];
-            if (firstHalf > secondHalf){
+            if (firstHalf > secondHalf) {
+                // if true, return false and alert the list has unsorted pairs.
                 return false;
             }
         }
 
-        //TODO COMMENTS
+        // return true if method successful steps through pairs and does not
+        // find an unsorted pair
         return true;
     }
 
-    // requirement 3: method called removeLast() that takes int n as a parameter
-    // and removed the first n values from a list of integers
+//     requirement 3: method called removeLast() that takes int n as a parameter
+//     and removes the last n values from a list of integers.
+//
+//
+//     pre: client will pass 0 through n size of array into this method.
+//     post: resize the array based on the provided number of elements to
+//     chop off the end.
 
 
-    public void removeLast(int n){
+    public void removeLast(int n) {
+        // resize size of array based off n
         size = size - n;
     }
 
