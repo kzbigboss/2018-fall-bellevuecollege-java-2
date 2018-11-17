@@ -1,6 +1,12 @@
 /*
 Mark Kazzaz
-source class
+2018-11-16
+Bellevue College
+CS211
+Fall Quarter
+
+Chapter 15: Assignment 7
+Source Class
  */
 
 import java.util.*;

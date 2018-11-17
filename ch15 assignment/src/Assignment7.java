@@ -1,13 +1,19 @@
 /*
 Mark Kazzaz
-test class
+2018-11-16
+Bellevue College
+CS211
+Fall Quarter
+
+Chapter 15: Assignment 7
+Test main()
  */
 
 public class Assignment7 {
     public static void main(String[] args) {
 
-//        testProblem1();
-//        testProblem2();
+        testProblem1();
+        testProblem2();
         testProblem3();
 
     }
@@ -73,9 +79,10 @@ public class Assignment7 {
     }
 
     public static void testProblem2() {
-        // WRONG - original built these methods as static methods
-        // Keeping original attempt to help build proper instance method testing
+        System.out.println("______START PROBLEM 2 TESTING______");
+        System.out.println();
 
+        System.out.println("Known sorted pairs, expecting true:");
         ArrayIntList problem2Sorted = new ArrayIntList();
         problem2Sorted.add(3);
         problem2Sorted.add(8);
@@ -94,7 +101,9 @@ public class Assignment7 {
         System.out.println(problem2Sorted);
 
         System.out.println("Pair sorted: " + problem2Sorted.isPairSorted());
+        System.out.println();
 
+        System.out.println("Known unsorted pairs, expecting false:");
         ArrayIntList problem2Unsorted = new ArrayIntList();
         problem2Unsorted.add(1);
         problem2Unsorted.add(9);
@@ -116,7 +125,61 @@ public class Assignment7 {
         System.out.println(problem2Unsorted);
 
         System.out.println("Pair sorted: " + problem2Unsorted.isPairSorted());
+        System.out.println();
 
+        System.out.println("Known single element list, expecting true due to odd zero:");
+        ArrayIntList problem2One = new ArrayIntList();
+        problem2One.add(1);
+        System.out.println(problem2One);
+        System.out.println("Pair sorted: " + problem2One.isPairSorted());
+        System.out.println();
+
+        System.out.println("Known zero element list, expecting true due to zero pairs:");
+        ArrayIntList problem2Zero = new ArrayIntList();
+        System.out.println(problem2Zero);
+        System.out.println("Pair sorted: " + problem2Zero.isPairSorted());
+        System.out.println();
+
+        System.out.println();
+        System.out.println("______FINISH PROBLEM 2 TESTING______");
+        System.out.println();
+
+
+    }
+
+    public static void testProblem3() {
+        /// create array for problem3a
+
+        System.out.println("______START PROBLEM 3 TESTING______");
+        System.out.println();
+
+        ArrayIntList problem3a = new ArrayIntList();
+
+        problem3a.add(8);
+        problem3a.add(17);
+        problem3a.add(9);
+        problem3a.add(24);
+        problem3a.add(42);
+        problem3a.add(3);
+        problem3a.add(8);
+
+        System.out.println("Starting array: " + problem3a);
+
+        problem3a.removeLast(0);
+
+        System.out.println("With removeLast(0): " + problem3a);
+
+        problem3a.removeLast(4);
+
+        System.out.println("With removeLast(4): " + problem3a);
+
+        problem3a.removeLast(problem3a.size());
+
+        System.out.println("With removeLast(size): " + problem3a);
+
+        System.out.println();
+        System.out.println("______FINISH PROBLEM 3 TESTING______");
+        System.out.println();
 
     }
 
@@ -210,31 +273,5 @@ public class Assignment7 {
 //
 //    }
 
-    public static void testProblem3() {
-        /// create array for problem3a
-        ArrayIntList problem3a = new ArrayIntList();
 
-        problem3a.add(8);
-        problem3a.add(17);
-        problem3a.add(9);
-        problem3a.add(24);
-        problem3a.add(42);
-        problem3a.add(3);
-        problem3a.add(8);
-
-        System.out.println(problem3a);
-
-        problem3a.removeLast(0);
-
-        System.out.println(problem3a);
-
-        problem3a.removeLast(4);
-
-        System.out.println(problem3a);
-
-        problem3a.removeLast(problem3a.size());
-
-        System.out.println(problem3a);
-
-    }
 }
