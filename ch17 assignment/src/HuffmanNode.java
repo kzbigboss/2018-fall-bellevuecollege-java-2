@@ -19,21 +19,15 @@ public class HuffmanNode { //TODO implements Comparable<HuffmanNode>
         Map<Character, Integer> charCounts = new TreeMap<Character, Integer>();
 
         try {
-            while (input.available() > 0) {
-
+            while (input.available() != 0) {
                 char value = (char) input.read();
-
                 if (charCounts.containsKey(value)) {
-
                     int count = charCounts.get(value);
                     charCounts.put(value, count + 1);
-
                 } else {
                     charCounts.put(value, 1);
                 }
-
             }
-
             input.close();
 
         } catch (Exception e) {
