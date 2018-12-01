@@ -1,3 +1,5 @@
+//studied https://github.com/aarondressler/Huffman-Encoding for help
+
 import java.util.*;
 import java.io.InputStream;
 
