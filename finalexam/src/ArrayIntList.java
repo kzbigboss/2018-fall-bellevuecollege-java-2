@@ -27,7 +27,9 @@ public class ArrayIntList implements Iterable<Integer> {
 	    if (size > 2) {
         result.add(elementData[0]);
         for (int i = 1; i < size; i++) {
-            result.add(result.get(i - 1) + elementData[i + 2]);
+            int a = result.get(i - 1);
+            int b = elementData[i + 2];
+            result.add(a + b);
 	        }
 	    }
 	    return result;
