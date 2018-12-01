@@ -46,14 +46,14 @@ public class HuffmanTree {
             HuffmanNode left = this.priorityQueue.remove();
             HuffmanNode right = this.priorityQueue.remove();
             int parentValue = left.frequency + right.frequency;
-            HuffmanNode parent = new HuffmanNode(parentValue);
+            HuffmanNode parent = new HuffmanNode(parentValue, left, right);
 
             // add new node back to queue
-            this.priorityQueue.add(parent);
+            priorityQueue.add(parent);
         }
 
         // make the root node the first node present in the queue
-        this.overallRoot = priorityQueue.peek();
+        this.overallRoot = priorityQueue.remove();
 
     }
 

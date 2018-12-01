@@ -17,6 +17,13 @@ public class HuffmanNode implements Comparable<HuffmanNode> {
         right = null;
     }
 
+    // constructor for new node with children
+    public HuffmanNode(int frequency, HuffmanNode left, HuffmanNode right){
+        this.frequency = frequency;
+        this.left = left;
+        this.right = right;
+    }
+
     // constructor for new node for count branch node
     public HuffmanNode(int frequency){
         this.frequency = frequency;
